@@ -5,4 +5,10 @@ describe "Showbacklogs" do
     visit '/bkleinen/showbacklogtestissues'
     page.should have_text 'Issue that should always be there.'
   end
+
+  it "should show backlog in order" do
+    visit '/bkleinen/showbacklogtestissues'
+
+
+  end
 end
