@@ -1,11 +1,8 @@
 require 'spec_helper'
 
 describe "Showbacklogs" do
-  describe "GET /showbacklogs" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get showbacklogs_path
-      response.status.should be(200)
-    end
+  it "shows issues from the repository" do
+    visit '/bkleinen/showbacklogtestissues'
+    # 'Issue that should always be there.'
   end
 end
