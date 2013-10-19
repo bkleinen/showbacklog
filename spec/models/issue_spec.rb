@@ -7,35 +7,35 @@ describe Issue do
     expect(issue.title).to eq("ask applicants to re-confirm")
   end
 
-  it "should pick gissues order from body" do
-    i = Issue.new
-    i.body = "bla bla @gissues:{\"order\":50,\"status\":\"backlog\"} foo bla"
-    i.parse_gissues_info_from_body
-    expect(i.gissues_order).to eq(50)
-    expect(i.gissues_status).to eq('backlog')
-  end
-  it "should pick gissues status from body" do
-    i = Issue.new
-    i.body = "bla bla @gissues:{\"order\":50,\"status\":\"backlog\"} foo bla"
-    i.parse_gissues_info_from_body
-    expect(i.gissues_status).to eq('backlog')
-  end
+  describe "(instance)" do
+    before do
+      @issue = Issue.new
+    end
 
-  it "should find_gissues_info" do
-    i = Issue.new
-    i.body =" @gissues:{\"order\":87.5,\"status\":\"backlog\"}"
-    expect(i.find_gissues_info(i.body)).to eq("{\"order\":87.5,\"status\":\"backlog\"}")
-  end
-  it "should find_gissues_info in longer string" do
-    i = Issue.new
-    i.body = "bla bla @gissues:{\"order\":50,\"status\":\"backlog\"} foo bla"
-    expect(i.find_gissues_info(i.body)).to eq("{\"order\":50,\"status\":\"backlog\"}")
-  end
+    it "should pick gissues order from body" do
+      @issue.body = "bla bla @gissues:{\"order\":50,\"status\":\"backlog\"} foo bla"
+      @issue.parse_gissues_info_from_body
+      expect(@issue.gissues_order).to eq(50)
+      expect(@issue.gissues_status).to eq('backlog')
+    end
+    it "should pick gissues status from body" do
+      @issue.body = "bla bla @gissues:{\"order\":50,\"status\":\"backlog\"} foo bla"
+      @issue.parse_gissues_info_from_body
+      expect(@issue.gissues_status).to eq('backlog')
+    end
 
-  it "should parse json" do
-    i = Issue.new
-    json = i.parse_json("{\"order\":87.5,\"status\":\"backlog\"}")
-    expect(json["order"]).to eq(87.5)
-  end
+    it "should find_gissues_info" do
+      body =" @gissues:{\"order\":87.5,\"status\":\"backlog\"}"
+      expect(@issue.find_gissues_info(body)).to eq("{\"order\":87.5,\"status\":\"backlog\"}")
+    end
+    it "should find_gissues_info in longer string" do
+      body = "bla bla @gissues:{\"order\":50,\"status\":\"backlog\"} foo bla"
+      expect(@issue.find_gissues_info(body)).to eq("{\"order\":50,\"status\":\"backlog\"}")
+    end
 
+    it "should parse json" do
+      json = @issue.parse_json("{\"order\":87.5,\"status\":\"backlog\"}")
+      expect(json["order"]).to eq(87.5)
+    end
+  end
 end

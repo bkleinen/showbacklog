@@ -8,7 +8,14 @@ describe "Showbacklogs" do
 
   it "should show backlog in order" do
     visit '/bkleinen/showbacklogtestissues'
-
-
+    "Issue A".should appear_before("Issue B")
+  end
+  it "should show backlog in order" do
+    visit '/bkleinen/showbacklogtestissues'
+    "Issue A".should appear_before("Issue C")
+  end
+  it "should show backlog in order" do
+    visit '/bkleinen/showbacklogtestissues'
+    "Issue B".should appear_before("Issue C")
   end
 end
