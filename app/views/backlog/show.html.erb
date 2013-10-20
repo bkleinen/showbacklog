@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th>Nr.</th>
       <th>Issue</th>
       <th>Priority Order</th>
       <th>Status</th>
@@ -13,10 +14,10 @@
   <tbody>
     <% @issues.each do |issue| %>
       <tr>
+        <td><%= link_to issue.number, issue.html_url%></td>
         <td><%= link_to issue.title, issue.html_url%></td>
         <td><%= issue.gissues_order %></td>
         <td><%= issue.gissues_status %></td>
-
       </tr>
     <% end %>
   </tbody>
